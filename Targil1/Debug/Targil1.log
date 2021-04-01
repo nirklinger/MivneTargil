@@ -1,0 +1,7 @@
+﻿  Targil1.cpp
+C:\Users\ניר\Documents\לימודים\Mivne\MivneTargil\Targil1\Targil1.cpp(20,23): warning C4244: 'initializing': conversion from '_Rep' to 'double', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+  Targil1.vcxproj -> C:\Users\ניר\Documents\לימודים\Mivne\MivneTargil\Targil1\Debug\Targil1.exe
