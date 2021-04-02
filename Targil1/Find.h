@@ -2,9 +2,11 @@
 #define _FIND_H_
 
 class Find {
-	static void insertionSort(int arr[], int n);
+	static void insertionSort(double numbers[], int size);
+	static void selectionSort(double numbers[], int size);
 public:
-	static int getNumberSizeByIndexInsertion(int index, int size, int* numbers);
-	static int getNumberSizeByIndexSelection(int index, int size, int* numbers);
+	static double getNumberSizeByIndexInsertion(int index, int size, double* numbers);
+	static double getNumberSizeByIndexSelection(int index, int size, double* numbers);
+	static double getNumberSizeByIndexFifthAlgo(int index, int size, double* numbers);
 };
 #endif

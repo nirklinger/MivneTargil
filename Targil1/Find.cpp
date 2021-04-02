@@ -1,27 +1,47 @@
 #include "Find.h"
 
-void Find::insertionSort(int arr[], int n)
+void Find::insertionSort(double numbers[], int size)
 {
-    int pivot, i, j;
-    for (i = 1; i < n; i++)
+    double pivot;
+    int i, j;
+    for (i = 1; i < size; i++)
     {
-        pivot = arr[i];
+        pivot = numbers[i];
         j = i - 1;
 
-        while (j >= 0 && arr[j] > pivot)
+        while (j >= 0 && numbers[j] > pivot)
         {
-            arr[j + 1] = arr[j];
+            numbers[j + 1] = numbers[j];
             j = j - 1;
         }
-        arr[j + 1] = pivot;
+        numbers[j + 1] = pivot;
     }
 }
 
-int Find::getNumberSizeByIndexInsertion(int i, int size, int* numbers) {
-    insertionSort(numbers, size);
-    return numbers[i];
+void Find::selectionSort(double numbers[], int size) {
+    for (int i = 0; i < size - 1; i++) {
+        int minIndex = i;
+
+        for (int j = i+1; j < size; j++) {
+            if (numbers[j] < numbers[minIndex]) {
+                minIndex = j;
+            }
+        }
+
+        if (minIndex != i) {
+            numbers[i] += numbers[minIndex];
+            numbers[minIndex] = numbers[i] - numbers[minIndex];
+            numbers[i] = numbers[i] - numbers[minIndex];
+        }
+    }
 }
 
-int getNumberSizeByIndexSelection(int index, int size, int* numbers) {
-    
+double Find::getNumberSizeByIndexInsertion(int index, int size, double* numbers) {
+    insertionSort(numbers, size);
+    return numbers[index];
+}
+
+double Find::getNumberSizeByIndexSelection(int index, int size, double* numbers) {
+    selectionSort(numbers, size);
+    return numbers[index];
 }

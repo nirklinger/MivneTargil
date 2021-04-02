@@ -16,20 +16,30 @@ using std::setprecision;
 using std::fixed;
 using namespace std::chrono;
 
-void reportTimes(steady_clock::time_point start, steady_clock::time_point end, ofstream& myFile) {
+double* copyArray(const double numbers[], int size) {
+    double* copy = new double[size];
+    
+    for (int i = 0; i < size; i++) {
+        copy[i] = numbers[i];
+    }
+
+    return copy;
+}
+
+void reportTimes(const char functionName[], steady_clock::time_point start, steady_clock::time_point end, ofstream& myFile) {
     double time_taken =
         duration_cast<nanoseconds>(end - start).count();
     time_taken *= 1e-9;    
-    myFile << "Time taken by function <name-of-fun> is : " << fixed
+    myFile << "Time taken by function " << functionName << " is : " << fixed
         << time_taken << setprecision(9);
     myFile << " sec" << endl;
 }
 
-int* getNumbers(int size) {
-    int* numbers = new int[size];
+double* getNumbers(int size) {
+    double* numbers = new double[size];
 
-    for (int i = 0; i < size; i++) {
-        cin >> numbers[i];
+    for (int index = 0; index < size; index++) {
+        cin >> numbers[index];
 
         if (!cin)
         {
@@ -44,26 +54,38 @@ int* getNumbers(int size) {
 
 int main()
 {
-    int n, i;
-    cin >> n;
-    cin >> i;
+    int size, index;
+    cin >> size;
+    cin >> index;
 
-    cout << "numbers: " << n << " index: " << i << endl;
+    cout << "numbers: " << size << " index: " << index << endl;
 
-    int* numbers = getNumbers(n);
+    double* numbers = getNumbers(size);
 
     ofstream myFile("Measure.txt"); // The name of the file
 
+    double* copyNumbers = copyArray(numbers, size);
     auto start = high_resolution_clock::now();
     ios_base::sync_with_stdio(false);
-    cout << Find::getNumberSizeByIndexInsertion(i, n, numbers);
+    printf("%.4f\n", Find::getNumberSizeByIndexInsertion(index, size, copyNumbers));
     auto end = high_resolution_clock::now();        
-    reportTimes(start, end, myFile);
+    reportTimes("insertion sort", start, end, myFile);
+    delete copyNumbers;
 
+    copyNumbers = copyArray(numbers, size);
     start = high_resolution_clock::now();
     ios_base::sync_with_stdio(false);
-    cout << Find::getNumberSizeByIndexSelection(i, n, numbers);
+    printf("%.4f\n", Find::getNumberSizeByIndexSelection(index, size, copyNumbers));
     end = high_resolution_clock::now();
-    
+    reportTimes("selection sort", start, end, myFile);
+    delete copyNumbers;
+
+    //start = high_resolution_clock::now();
+    //ios_base::sync_with_stdio(false);
+    //cout << setprecision(4) << Find::getNumberSizeByIndexFifthAlgo(index, size, numbers) << endl;
+    //end = high_resolution_clock::now();
+    //reportTimes("selection sort", start, end, myFile);
+    //delete numbers;
+
     myFile.close();
 }
