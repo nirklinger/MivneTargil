@@ -36,6 +36,22 @@ void Find::selectionSort(double numbers[], int size) {
     }
 }
 
+void Find::swap(double* num1, double* num2)
+{
+    double temp = *num1;
+    *num1 = *num2;
+    *num2 = temp;
+}
+
+void Find::bubbleSort(double numbers[], int size)
+{
+    int i, j;
+    for (i = 0; i < size - 1; i++)
+        for (j = 0; j < size - i - 1; j++)
+            if (numbers[j] > numbers[j + 1])
+                swap(&numbers[j], &numbers[j + 1]);
+}
+
 double Find::getNumberSizeByIndexInsertion(int index, int size, double* numbers) {
     insertionSort(numbers, size);
     return numbers[index];
