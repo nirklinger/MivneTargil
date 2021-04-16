@@ -1,2 +1,3 @@
-Time taken by function insertion sort is : 0.003163 sec
-Time taken by function selection sort is : 0.000058200 sec
+Time taken by function insertion sort is : 0.000093 sec
+Time taken by function selection sort is : 0.000041600 sec
+Time taken by function selection sort is : 0.000040700 sec

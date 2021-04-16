@@ -80,12 +80,12 @@ int main()
     reportTimes("selection sort", start, end, myFile);
     delete copyNumbers;
 
-    //start = high_resolution_clock::now();
-    //ios_base::sync_with_stdio(false);
-    //cout << setprecision(4) << Find::getNumberSizeByIndexFifthAlgo(index, size, numbers) << endl;
-    //end = high_resolution_clock::now();
-    //reportTimes("selection sort", start, end, myFile);
-    //delete numbers;
+    start = high_resolution_clock::now();
+    ios_base::sync_with_stdio(false);
+	printf("%.4f\n", Find::getNumberSizeByIndexFifthAlgo(index, size, numbers));
+    end = high_resolution_clock::now();
+    reportTimes("selection sort", start, end, myFile);
+    delete numbers;
 
     myFile.close();
 }
