@@ -76,14 +76,17 @@ double Find::getNumberSizeByIndexFifthAlgo(int index, int size, double* numbers)
 		bubbleSort(numbers, 0, size - 1);
 		return numbers[index];
 	}
-	int i, mediansSize = size / 5 + 1;
 
+	int i, mediansSize = size / 5 + 1;
 	double* medians = new double[mediansSize];
+
 	for (i = 0; i < size / 5; i++) {
 		bubbleSort(numbers, i * 5, i * 5 + 4);
 		medians[i] = numbers[i * 5 + 2];
 	}
+
 	int sizeMod = size % 5;
+	
 	if (sizeMod != 0) {
 		bubbleSort(numbers, i * 5, size - 1);
 		medians[mediansSize - 1] = numbers[sizeMod / 2 + i * 5];
@@ -93,17 +96,20 @@ double Find::getNumberSizeByIndexFifthAlgo(int index, int size, double* numbers)
 	double pivot = getNumberSizeByIndexFifthAlgo(mediansSize / 2, mediansSize, medians);
 	delete medians;
 	int pivotIndex = 0;
+	
 	while (numbers[pivotIndex] != pivot) {
 		pivotIndex++;
 	}
+
 	swap(&numbers[0], &numbers[pivotIndex]);
 	pivotIndex = partition(numbers, size);
+	
 	if (index < pivotIndex) {
 		return getNumberSizeByIndexFifthAlgo(index, pivotIndex, numbers);
 	}
 	else if (index > pivotIndex) {
-		double* p = numbers + pivotIndex + 1;
-		return getNumberSizeByIndexFifthAlgo(index - pivotIndex, size - pivotIndex - 1, p);
+		double* p = numbers + pivotIndex;
+		return getNumberSizeByIndexFifthAlgo(index - pivotIndex, size - pivotIndex, p);
 	}
 	else return numbers[pivotIndex];
 }
@@ -111,7 +117,8 @@ double Find::getNumberSizeByIndexFifthAlgo(int index, int size, double* numbers)
 int Find::partition(double numbers[], int size) {
 	int i, pointer = size - 1, pivot = 0;
 	for (i = 0; i < size; i++) {
-		if (numbers[pivot] > numbers[pointer])
+		if (numbers[pivot] > numbers[pointer] && pivot < pointer
+			|| numbers[pivot] < numbers[pointer] && pivot > pointer)
 		{
 			swap(&numbers[pivot], &numbers[pointer]);
 			swap(pivot, pointer);
@@ -119,11 +126,9 @@ int Find::partition(double numbers[], int size) {
 		if (pivot > pointer) {
 			pointer++;
 		}
-		else {
-			if (pointer < pivot)
-				pointer--;
-			else return pivot;
-		}
+		else if (pointer > pivot)
+			pointer--;
+		else return pivot;		
 	}
 }
 
