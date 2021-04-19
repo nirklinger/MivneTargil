@@ -18,24 +18,16 @@ void Find::insertionSort(double numbers[], int size)
 	}
 }
 
-void Find::selectionSort(double numbers[], int size) {
-	for (int i = 0; i < size - 1; i++) {
-		int minIndex = i;
-
-		for (int j = i + 1; j < size; j++) {
-			if (numbers[j] < numbers[minIndex]) {
-				minIndex = j;
-			}
-		}
-
-		if (minIndex != i) {
-			numbers[i] += numbers[minIndex];
-			numbers[minIndex] = numbers[i] - numbers[minIndex];
-			numbers[i] = numbers[i] - numbers[minIndex];
-		}
-	}
+int Find::selection(double numbers[], int left, int right, int index) {
+	int pivot, leftPart;
+	pivot = partition(numbers, left, right);
+	leftPart = pivot - left + 1;
+	if (index == leftPart)
+		return pivot;
+	if (index < leftPart)
+		return selection(numbers, left, pivot - 1, index);
+	else return selection(numbers, pivot + 1, right, index - leftPart);
 }
-
 
 void Find::swap(double* num1, double* num2)
 {
@@ -51,7 +43,6 @@ void Find::swap(int& num1, int& num2)
 	num2 = temp;
 }
 
-
 void Find::bubbleSort(double numbers[], int indexStart, int indexEnd)
 {
 	int i, j;
@@ -63,12 +54,12 @@ void Find::bubbleSort(double numbers[], int indexStart, int indexEnd)
 
 double Find::getNumberSizeByIndexInsertion(int index, int size, double* numbers) {
 	insertionSort(numbers, size);
-	return numbers[index];
+	return numbers[index-1];
 }
 
 double Find::getNumberSizeByIndexSelection(int index, int size, double* numbers) {
-	selectionSort(numbers, size);
-	return numbers[index];
+	int selected = selection(numbers, 0, size - 1, index);
+	return numbers[selected];
 }
 
 double Find::getNumberSizeByIndexFifthAlgo(int index, int size, double* numbers) {
@@ -86,7 +77,7 @@ double Find::getNumberSizeByIndexFifthAlgo(int index, int size, double* numbers)
 	}
 
 	int sizeMod = size % 5;
-	
+
 	if (sizeMod != 0) {
 		bubbleSort(numbers, i * 5, size - 1);
 		medians[mediansSize - 1] = numbers[sizeMod / 2 + i * 5];
@@ -96,14 +87,14 @@ double Find::getNumberSizeByIndexFifthAlgo(int index, int size, double* numbers)
 	double pivot = getNumberSizeByIndexFifthAlgo(mediansSize / 2, mediansSize, medians);
 	delete medians;
 	int pivotIndex = 0;
-	
+
 	while (numbers[pivotIndex] != pivot) {
 		pivotIndex++;
 	}
 
 	swap(&numbers[0], &numbers[pivotIndex]);
 	pivotIndex = partition(numbers, size);
-	
+
 	if (index < pivotIndex) {
 		return getNumberSizeByIndexFifthAlgo(index, pivotIndex, numbers);
 	}
@@ -112,6 +103,69 @@ double Find::getNumberSizeByIndexFifthAlgo(int index, int size, double* numbers)
 		return getNumberSizeByIndexFifthAlgo(index - pivotIndex, size - pivotIndex, p);
 	}
 	else return numbers[pivotIndex];
+}
+
+double Find::getNumberSizeByIndexFifthAlgo(double* numbers, int left, int right, int index) {
+	const int size = right - left + 1;
+	if (size <= 5) {
+		bubbleSort(numbers, left, right);
+		return numbers[index-1];
+	}
+
+	int i, mediansSize = size / 5 + 1;
+	double* medians = new double[mediansSize];
+
+	for (i = 0; i < size / 5; i++) {
+		int batchIndex = left + i * 5;
+		bubbleSort(numbers, batchIndex , batchIndex + 4);
+		medians[i] = numbers[batchIndex + 2];
+	}
+
+	int sizeMod = size % 5;
+	
+	if (sizeMod != 0) {
+		int batchIndex = left + i * 5;
+		bubbleSort(numbers, batchIndex, right);
+		medians[mediansSize - 1] = numbers[sizeMod / 2 + batchIndex];
+	}
+	else mediansSize--;
+
+	double pivot = getNumberSizeByIndexFifthAlgo(medians, 0, mediansSize-1, mediansSize/2);
+	delete medians;
+	int pivotIndex = 0;
+	
+	while (numbers[left + pivotIndex] != pivot) {
+		pivotIndex++;
+	}
+
+	swap(&numbers[left], &numbers[left + pivotIndex]);
+	pivotIndex = partition(numbers, left, right) - left;
+	
+	if ((index-1) < pivotIndex) {
+		return getNumberSizeByIndexFifthAlgo(numbers, left, left + pivotIndex - 1, index);
+	}
+	else if ((index-1) > pivotIndex) {
+		return getNumberSizeByIndexFifthAlgo(numbers, left + pivotIndex + 1, right, index-pivotIndex);
+	}
+	else return numbers[left + pivotIndex];
+}
+
+int Find::partition(double numbers[], int left, int right) {
+	int i, pointer = right, pivot = left;
+	for (i = left; i <= right; i++) {
+		if (numbers[pivot] > numbers[pointer] && pivot < pointer
+			|| numbers[pivot] < numbers[pointer] && pivot > pointer)
+		{
+			swap(&numbers[pivot], &numbers[pointer]);
+			swap(pivot, pointer);
+		}
+		if (pivot > pointer) {
+			pointer++;
+		}
+		else if (pointer > pivot)
+			pointer--;
+		else return pivot;
+	}
 }
 
 int Find::partition(double numbers[], int size) {
@@ -128,13 +182,6 @@ int Find::partition(double numbers[], int size) {
 		}
 		else if (pointer > pivot)
 			pointer--;
-		else return pivot;		
+		else return pivot;
 	}
-}
-
-int Find::findHatzion(double numbers[], int size) {
-	if (size == 1)
-		return numbers[size - 1];
-
-
 }

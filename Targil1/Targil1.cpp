@@ -57,7 +57,11 @@ int main()
     int size, index;
     cin >> size;
     cin >> index;
-
+	if ((size < index)||(index<1)){
+		cout << "wrong input";
+		exit(1);
+	}
+	else{
     cout << "numbers: " << size << " index: " << index << endl;
 
     double* numbers = getNumbers(size);
@@ -82,10 +86,11 @@ int main()
 
     start = high_resolution_clock::now();
     ios_base::sync_with_stdio(false);
-	printf("%.4f\n", Find::getNumberSizeByIndexFifthAlgo(index, size, numbers));
+	printf("%.4f\n", Find::getNumberSizeByIndexFifthAlgo(index-1,size,numbers));
     end = high_resolution_clock::now();
     reportTimes("selection sort", start, end, myFile);
     delete numbers;
 
     myFile.close();
+	}
 }
