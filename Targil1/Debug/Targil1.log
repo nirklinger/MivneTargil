@@ -1,5 +1,3 @@
 ﻿  Find.cpp
-C:\Users\ניר\Documents\לימודים\Mivne\MivneTargil\Targil1\Find.cpp(137,26): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-C:\Users\ניר\Documents\לימודים\Mivne\MivneTargil\Targil1\Find.cpp(133): warning C4715: 'Find::partition': not all control paths return a value
-C:\Users\ניר\Documents\לימודים\Mivne\MivneTargil\Targil1\Find.cpp(140): warning C4715: 'Find::findHatzion': not all control paths return a value
-  Targil1.vcxproj -> C:\Users\ניר\Documents\לימודים\Mivne\MivneTargil\Targil1\Debug\Targil1.exe
+C:\Users\or_st\Programming\Data Structures Course\Targil1\MivneTargil\MivneTargil\Targil1\Find.cpp(130): warning C4715: 'Find::partition': not all control paths return a value
+  Targil1.vcxproj -> C:\Users\or_st\Programming\Data Structures Course\Targil1\MivneTargil\MivneTargil\Targil1\Debug\Targil1.exe

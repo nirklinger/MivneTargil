@@ -86,7 +86,7 @@ int main()
 
     start = high_resolution_clock::now();
     ios_base::sync_with_stdio(false);
-	printf("%.4f\n", Find::getNumberSizeByIndexFifthAlgo(index, size, numbers));
+	printf("%.4f\n", Find::getNumberSizeByIndexFifthAlgo(numbers,0,size-1,index));
     end = high_resolution_clock::now();
     reportTimes("selection sort", start, end, myFile);
     delete numbers;
