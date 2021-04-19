@@ -57,7 +57,11 @@ int main()
     int size, index;
     cin >> size;
     cin >> index;
-
+	if ((size < index)||(index<1)){
+		cout << "wrong input";
+		exit(1);
+	}
+	else{
     cout << "numbers: " << size << " index: " << index << endl;
 
     double* numbers = getNumbers(size);
@@ -88,4 +92,5 @@ int main()
     delete numbers;
 
     myFile.close();
+	}
 }

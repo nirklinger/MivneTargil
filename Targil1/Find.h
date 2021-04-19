@@ -8,7 +8,6 @@ class Find {
 	static void swap(double* num1, double* num2);
 	static void swap(int& num1, int& num2);
 	static int partition(double numbers[], int size);
-	static int findHatzion(double numbers[], int size);
 public:
 	static double getNumberSizeByIndexInsertion(int index, int size, double* numbers);
 	static double getNumberSizeByIndexSelection(int index, int size, double* numbers);

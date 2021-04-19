@@ -63,18 +63,19 @@ void Find::bubbleSort(double numbers[], int indexStart, int indexEnd)
 
 double Find::getNumberSizeByIndexInsertion(int index, int size, double* numbers) {
 	insertionSort(numbers, size);
-	return numbers[index];
+	return numbers[index-1];
 }
 
 double Find::getNumberSizeByIndexSelection(int index, int size, double* numbers) {
 	selectionSort(numbers, size);
-	return numbers[index];
+	return numbers[index-1];
 }
+
 
 double Find::getNumberSizeByIndexFifthAlgo(int index, int size, double* numbers) {
 	if (size <= 5) {
 		bubbleSort(numbers, 0, size - 1);
-		return numbers[index];
+		return numbers[index-1];
 	}
 
 	int i, mediansSize = size / 5 + 1;
@@ -104,10 +105,10 @@ double Find::getNumberSizeByIndexFifthAlgo(int index, int size, double* numbers)
 	swap(&numbers[0], &numbers[pivotIndex]);
 	pivotIndex = partition(numbers, size);
 	
-	if (index < pivotIndex) {
+	if ((index-1) < pivotIndex) {
 		return getNumberSizeByIndexFifthAlgo(index, pivotIndex, numbers);
 	}
-	else if (index > pivotIndex) {
+	else if ((index-1) > pivotIndex) {
 		double* p = numbers + pivotIndex;
 		return getNumberSizeByIndexFifthAlgo(index - pivotIndex, size - pivotIndex, p);
 	}
@@ -130,11 +131,4 @@ int Find::partition(double numbers[], int size) {
 			pointer--;
 		else return pivot;		
 	}
-}
-
-int Find::findHatzion(double numbers[], int size) {
-	if (size == 1)
-		return numbers[size - 1];
-
-
 }
