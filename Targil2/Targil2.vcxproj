@@ -140,12 +140,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Algorithms.cpp" />
-    <ClCompile Include="MinHeap.cpp" />
+    <ClCompile Include="Node.cpp" />
     <ClCompile Include="Targil2.cpp" />
     <ClCompile Include="UserInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Algorithms.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="MinHeap.h" />
     <ClInclude Include="UserInput.h" />
   </ItemGroup>
