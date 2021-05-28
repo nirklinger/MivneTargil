@@ -5,6 +5,7 @@
 #include <fstream>
 #include <vector>
 #include "UserInput.h"
+#include "Algorithms.h"
 
 using std::cin;
 using std::cout;
@@ -28,9 +29,13 @@ int main() {
 		arr = new int[inputData.getN()];
 		inputData.fillArrFromFile(arr, myInputFile);
 		shouldContinue = inputData.isFileDataValid();
-		//if (!shouldContinue) {}
-		//return 1;
-		//inputData.emptyArrToFile(arr, inputData.getN(), myOutputFile);   PRINTING TO FILE
+		if (!shouldContinue) {
+			delete[] arr;
+			return 1;
+		}
+		Algorithms::kWayMerge(arr, inputData.getN(), inputData.getK());
+		inputData.emptyArrToFile(arr, inputData.getN(), myOutputFile);   // PRINTING TO FILE
+		delete[] arr;
 	}
 
 	return 0;

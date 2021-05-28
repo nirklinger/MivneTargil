@@ -7,13 +7,17 @@ void UserInput::getInputFromUser() {
 	cin >> k;
 	cout << "Enter the name of the input file" << endl;
 	cin >> inputFile;
-	cout << "Enter the name of the input file" << endl;
+	cout << "Enter the name of the output file" << endl;
 	cin >> outputFile;
+}
+
+void UserInput::printErrorMessage() {
+	cout << "wrong input" << endl;
 }
 
 bool UserInput::isKeyboardDataValid() {
 	if ((k < 1) || (n < 1)) {
-		cout << "wrong input" << endl;
+		printErrorMessage();
 		return false;
 	}
 }
@@ -30,7 +34,7 @@ void UserInput::fillArrFromFile(int* arrey, ifstream& myInputFile) {
 	return;
 }
 
-void emptyArrToFile(int* arrey, const int& size, ofstream& myOutputFile) {
+void UserInput::emptyArrToFile(int* arrey, const int& size, ofstream& myOutputFile) {
 	for (int i = 0; i < size; ++i) {
 		myOutputFile << arrey[i] << endl;
 	}
@@ -54,8 +58,10 @@ bool UserInput::isDigit(const char& ch) {
 }
 
 bool UserInput::isFileDataValid() {
-	if (n > actualInts)
+	if (n > actualInts) {
+		printErrorMessage();
 		return false;
+	}
 }
 
 void UserInput::checkArr(int* arrey) {
