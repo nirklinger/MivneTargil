@@ -76,7 +76,7 @@ int** Algorithms::splitToK(int arr[], const int size, const int k) {
 
 void Algorithms::kWayMerge(int arr[], const int size, const int k) {
     if (size <= k) {
-        quickSort(arr, 0, size);
+        quickSort(arr, 0, size - 1);
         return;
     }
 
@@ -114,9 +114,10 @@ void Algorithms::heapMerge(int mergedArr[], int* smallArrs[], const int size, co
     for (int i = 0; i < size; i++) {
         Node* currMin = minHeap.getMin();
         mergedArr[i] = currMin->getKey();
-        bool hasNext = currMin->advance();
+        bool hasNext = currMin->canAdvance();
         
         if (hasNext) {
+            currMin->advance();
             minHeap.heapifyDown(0);            
         }
         else {

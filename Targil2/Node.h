@@ -11,7 +11,8 @@ public:
 	bool operator >(const Node& other) const;
 	bool operator <=(const Node& other) const;
 	int getKey() const { return arr[currentIndex]; }
-	bool advance();
+	bool canAdvance();
+	void advance();
 };
 
 #endif

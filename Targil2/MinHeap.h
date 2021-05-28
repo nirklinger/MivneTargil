@@ -87,13 +87,13 @@ void MinHeap<T>::heapifyDown(const int index) {
 		int smallestIndex = index; // start out smallest index at parent index
 
 		// if the left child > parent
-		if (heapArr[leftChildIndex] < heapArr[smallestIndex]) {
+		if (leftChildIndex < size && heapArr[leftChildIndex] < heapArr[smallestIndex]) {
 			// reassign smallest index to left child index
 			smallestIndex = leftChildIndex;
 		}
 
 		// if the right child > element at smallest index (either parent or left child)
-		if (heapArr[rightChildIndex] <= heapArr[smallestIndex]) {
+		if (rightChildIndex < size && heapArr[rightChildIndex] <= heapArr[smallestIndex]) {
 			// reassign smallest index to right child index
 			smallestIndex = rightChildIndex;
 		}
@@ -128,7 +128,7 @@ T* MinHeap<T>::deleteMin() {
 	// reassign first element to the last element
 	size--;
 	if (size) {
-		T& end = heapArr[--size];
+		T& end = heapArr[size];
 		heapArr[0] = end;
 		// heapify down until element is back in its correct position
 		heapifyDown(0);

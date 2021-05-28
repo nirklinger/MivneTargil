@@ -19,8 +19,7 @@ class UserInput {
 	//Data members
 	int n, k, actualInts = 0;
 	std::string inputFile, outputFile;
-
-
+	void printErrorMessage();
 public:
 	const int& getN() { return n; }
 	const int& getK() { return k; }
@@ -34,9 +33,6 @@ public:
 	bool isDigit(const char& ch);
 	bool isFileDataValid();
 	void checkArr(int* arrey);
-
-
-	//void printInputForTest();
 };
 
 #endif

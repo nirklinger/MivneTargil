@@ -24,11 +24,14 @@ bool Node::operator <=(const Node& other) const{
 	return getKey() <= other.getKey();
 }
 
-bool Node::advance() {
+bool Node::canAdvance() {
 	if (currentIndex >= size-1) {
 		return false;
 	}
 
-	currentIndex++;
 	return true;
+}
+
+void Node::advance() {
+	currentIndex++;
 }
